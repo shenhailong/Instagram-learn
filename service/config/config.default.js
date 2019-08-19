@@ -35,6 +35,8 @@ module.exports = appInfo => {
   config.password_secret = '123456abc';
   config.auth_cookie_name = 'token';
   config.jwtSecret = 'shenhailong';
+  config.authWhiteList = [ '/', '/api/v2', '/api/v2/login', '/api/v2/register' ];
+  config.middleware = [ 'authorization' ];
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

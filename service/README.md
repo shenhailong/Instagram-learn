@@ -32,8 +32,6 @@ $ npm stop
 
 [egg]: https://eggjs.org
 
-
-
 egg.js post 提交会默认有安全防攻击
 csrf 跨站请求伪造
 取消 config security: false
@@ -45,3 +43,6 @@ crypto 通用的加密和哈希算法， Hmac sha256
 
 json web token jwt 是一个非常轻巧的规范，允许我们在用户和服务之间传递安全可靠的信息
 
+状态码 status code
+400 请求非法，导致服务器不接收请求
+401 未经过授权，被服务器配置拒绝
