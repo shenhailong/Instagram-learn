@@ -10,4 +10,9 @@ module.exports = {
     enable: true,
     package: 'egg-router-plus',
   },
+
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize',
+  },
 };
