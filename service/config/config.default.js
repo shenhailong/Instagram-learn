@@ -32,6 +32,9 @@ module.exports = appInfo => {
     password: '12345678',
     database: 'learn',
   };
+  config.password_secret = '123456abc';
+  config.auth_cookie_name = 'token';
+  config.jwtSecret = 'shenhailong';
   // add your user config here
   const userConfig = {
     // myAppName: 'egg',

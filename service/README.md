@@ -37,3 +37,11 @@ $ npm stop
 egg.js post 提交会默认有安全防攻击
 csrf 跨站请求伪造
 取消 config security: false
+
+password 加密
+存储密码时，存储加密过后
+登陆，使用用户输入的密码和同样的加密方式，将两个加密后的字符串进行比较
+crypto 通用的加密和哈希算法， Hmac sha256
+
+json web token jwt 是一个非常轻巧的规范，允许我们在用户和服务之间传递安全可靠的信息
+
