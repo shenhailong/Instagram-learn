@@ -24,10 +24,7 @@ class LoginController extends Controller {
         // domain: '127.0.0.1',
       };
       ctx.cookies.set(this.config.auth_cookie_name, token, opts);
-      ctx.status = 200;
-      ctx.body = {
-        msg: '登陆成功',
-      };
+      ctx.returnBody(200, '登陆成功');
     } else {
       ctx.throw(400, '用户名或密码错误');
     }

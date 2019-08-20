@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Form, Icon, Input, Button, notification } from 'antd';
 import Style from './index.scss'
-
+import API from '@common/api.js'
+import { withRouter } from 'react-router';
 const FormItem = Form.Item;
 
 class LoginForm extends Component {
@@ -17,14 +18,16 @@ class LoginForm extends Component {
     e.preventDefault();
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       if(!err) {
-        console.log(values)
+        let response = await API.login(values)
         notification['success']({
           message: '登陆成功'
         })
         // let response = await 
-      } else {
-
       }
+      const { history } = this.props;
+      setTimeout(() => {
+        history.push('/')
+      }, 500)
     })
   }
 
@@ -36,7 +39,6 @@ class LoginForm extends Component {
 
   render() {
     const { getFieldDecorator } = this.props.form;
-    console.log(getFieldDecorator)
     return (
       <section className={Style.signup}>
         <h1 className="header">
@@ -88,4 +90,4 @@ class LoginForm extends Component {
 
 const WrappedLoginForm = Form.create()(LoginForm)
 
-export default WrappedLoginForm;
+export default withRouter(WrappedLoginForm);

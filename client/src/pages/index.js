@@ -8,7 +8,7 @@ export default class Instagram extends Component {
     return (
       <Router>
         <Switch>
-          {/* <Route exact path="/" /> */}
+          <Route exact path="/" />
           <Route path="/login" component={Login}/>
         </Switch>
       </Router>
