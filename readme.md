@@ -1,0 +1,1 @@
+webpack4.0 支持css module 无需手动申明

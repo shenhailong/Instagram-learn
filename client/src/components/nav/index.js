@@ -18,11 +18,11 @@ class Nav extends Component {
 
     return (
       <nav className={Style['page-header']}>
-        <div className={`${Style['header']} ${Style['toggle']}`}>
-          <div className={Style['navigate']}>
+        <div className="header toggle">
+          <div className="navigate">
             <Dropdown overlay={aboutMenu}>
               {/* <Link to={'/about'} className="user"/> */}
-              <a  className={Style['user']}></a>
+              <a  className="user"></a>
             </Dropdown>
           </div>
         </div>
