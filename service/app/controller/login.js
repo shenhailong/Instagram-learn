@@ -29,6 +29,13 @@ class LoginController extends Controller {
       ctx.throw(400, '用户名或密码错误');
     }
   }
+
+  // 退出
+  async signOut() {
+    const { ctx } = this;
+    ctx.cookies.set(this.config.auth_cookie_name, '');
+    ctx.returnBody(200, '退出成功');
+  }
 }
 
 module.exports = LoginController;

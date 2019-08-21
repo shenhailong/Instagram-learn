@@ -11,5 +11,7 @@ module.exports = app => {
   // api 版本
   apiV2Router.post('/login/register', controller.login.register);
   apiV2Router.post('/login', controller.login.loginIn);
+  apiV2Router.get('/login/signout', controller.login.signOut);
 
+  apiV2Router.get('/user/info', controller.user.userInfo);
 };
