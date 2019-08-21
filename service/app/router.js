@@ -14,4 +14,8 @@ module.exports = app => {
   apiV2Router.get('/login/signout', controller.login.signOut);
 
   apiV2Router.get('/user/info', controller.user.userInfo);
+
+  // topic
+  apiV2Router.post('/topic/add', controller.topic.addTopic);
+  apiV2Router.get('/topic/detail', controller.topic.topicDetail);
 };
