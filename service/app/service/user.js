@@ -73,6 +73,33 @@ class UserService extends Service {
       },
     });
   }
+
+  // 获取未关注用户
+  async getUserList(userId) {
+    const { app } = this;
+    const Op = app.Sequelize.Op;
+    let followList = await this.ctx.model.Follow.findAll({
+      attributes: [ 'userId' ],
+      where: {
+        followedId: userId,
+        status: 1,
+      },
+    });
+
+    followList = followList.map(item => {
+      return item.userId;
+    });
+    console.log(followList);
+    return this.ctx.model.User.findAll({
+      attributes: [ 'userId', 'username', 'email', 'avatarUrl', 'abstract' ],
+      where: {
+        userId: {
+          [Op.ne]: userId,
+          [Op.notIn]: followList,
+        },
+      },
+    });
+  }
 }
 
 module.exports = UserService;

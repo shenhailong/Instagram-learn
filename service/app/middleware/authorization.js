@@ -1,6 +1,7 @@
 'use strict';
 module.exports = (options, app) => {
   return async function(ctx, next) {
+    console.log(app.config.authWhiteList.indexOf(ctx.url));
     if (app.config.authWhiteList.indexOf(ctx.url) !== -1) {
       await next(options);
       return;
