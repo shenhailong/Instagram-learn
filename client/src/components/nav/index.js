@@ -34,7 +34,6 @@ class Nav extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props)
     if (!this.props.userInfo.userId){
       API.getUserInfo().then( res => {
         this.props.addUserInfo(res.data)

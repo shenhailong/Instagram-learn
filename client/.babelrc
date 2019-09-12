@@ -1,8 +1,9 @@
 {
-  "presets": [ "env", "react"],
+  "presets": [ "env", "react", "stage-0"],
   "plugins": [
     "transform-decorators-legacy",
     "transform-runtime",
+    "transform-object-rest-spread",
     [
       "import",
       {
