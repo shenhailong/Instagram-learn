@@ -19,13 +19,36 @@ class TopicService extends Service {
     const topic = await ctx.service.topic.queryTopicDetail({
       topicId: +topicId,
     });
+    const userId = topic.userId;
+    const user = await this.service.user.getUserByUserId(userId);
+    const topicDetail = {
+      userInfo: {
+        username: user.username,
+        avatarUrl: user.avatarUrl,
+        userId: user.userId,
+      },
+      topic: {
+        topicImgList: topic.topicImg,
+        created_at: topic.created_at,
+        topicId,
+      },
+    };
+    return topicDetail || {};
   }
 
   async queryTopicCounts(query) {
     const { ctx } = this;
     return await ctx.model.Topic.findAndCountAll({
       where: query,
-      order: [[ 'creates_at', 'DESC' ]],
+      order: [[ 'created_at', 'DESC' ]],
+    });
+  }
+
+  async queryTopicList(query) {
+    const { ctx } = this;
+    return await ctx.model.Topic.findAll({
+      where: query,
+      order: [[ 'created_at', 'DESC' ]],
     });
   }
 }

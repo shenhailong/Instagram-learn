@@ -23,6 +23,32 @@ class TopicController extends Controller {
     ctx.returnBody(200, 'ok', topicDetail);
   }
 
+  async friendsTopicList() {
+    const { ctx } = this;
+    const userId = ctx.user.userId;
+    const follower = await ctx.service.follow.findFollow({
+      followedId: userId,
+      status: 1,
+    });
+    const followList = follower.map(item => {
+      return item.userId;
+    });
+    followList.push(userId);
+    const Op = this.app.Sequelize.Op;
+    const topics = await ctx.service.topic.queryTopicList({
+      userId: {
+        [Op.in]: followList,
+      },
+    });
+    // userInfo
+    const topicList = [];
+    for (const topic of topics) {
+      const item = await ctx.service.topic.topicDetailHandler(topic.topicId);
+      topicList.push(item);
+    }
+    topicList && ctx.returnBody(200, 'ok', topicList);
+  }
+
 }
 
 module.exports = TopicController;

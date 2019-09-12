@@ -20,3 +20,7 @@ exports.followUser = (data) => {
 exports.friendList = (data) =>{
   return instance.get('/friend/list', data)
 }
+
+exports.friendTopicList = () => {
+  return instance.get('/topic/friend/list')
+}

@@ -18,6 +18,8 @@ module.exports = app => {
   // topic
   apiV2Router.post('/topic/add', controller.topic.addTopic);
   apiV2Router.get('/topic/detail', controller.topic.topicDetail);
+  apiV2Router.get('/topic/friend/list', controller.topic.friendsTopicList);
+
 
   // follow
   apiV2Router.post('/friend/follow', controller.friend.follow);

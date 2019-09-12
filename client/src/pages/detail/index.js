@@ -4,10 +4,12 @@ import Nav from '@components/nav/index.js';
 import Recommend from './components/recommend/index.js';
 import API from '@common/api.js';
 import update from 'react-addons-update';
+import DynamicList from './components/dynamic-list/index.jsx'
 class Detail extends Component {
   constructor(props) {
     super(props)
     this.initFriendList() // 获取推荐关键用户
+    this.initFriendTopic() // 获取关注用户topic列表
     this.state = {
       followList: []
     }
@@ -22,6 +24,11 @@ class Detail extends Component {
     this.setState({
       followList: followList
     })
+  }
+  
+  async initFriendTopic() {
+    let response = await API.friendTopicList();
+    console.log(response)
   }
 
   setFollowStatus = async (index, status) => {
@@ -48,7 +55,7 @@ class Detail extends Component {
           <span className="loading"></span>
           <div className={Style['home-detail']}></div>
 
-            {/* <DynamicList/> */}
+            <DynamicList/>
             <Recommend 
               followList={this.state.followList}
               setFollowStatus={this.setFollowStatus}
