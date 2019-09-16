@@ -24,7 +24,7 @@ class Recommend extends Component {
         <header className="header">
           <Avatar userInfo={userInfo} avatarStyle={avatarStyle1} />
         </header>
-        <section className="post">
+        <section onClick={() => this.props.togglePostTopic()} className="post">
           发帖
         </section>
         <section className="container">
