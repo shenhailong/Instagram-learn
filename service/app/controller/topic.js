@@ -65,6 +65,24 @@ class TopicController extends Controller {
     discuss && ctx.returnBody(200, 'ok', discuss);
   }
 
+  async putLikeTopic() {
+    const { ctx } = this;
+    const { topicId, status } = ctx.request.body;
+    const userId = ctx.user.userId;
+    const topicStatus = {
+      topicId,
+      status,
+      userId,
+    };
+    // 点击取消点赞
+    const query = {
+      topicId,
+      userId,
+    };
+    const like = await ctx.service.topic.putTopicLike(query, topicStatus);
+    like && ctx.returnBody(200, 'ok', like);
+  }
+
 }
 
 module.exports = TopicController;

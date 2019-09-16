@@ -28,4 +28,7 @@ module.exports = app => {
   // comment
   apiV2Router.post('/topic/discuss/add', controller.topic.addDiscuss);
 
+  // like
+  apiV2Router.post('/topic/like', controller.topic.putLikeTopic);
+
 };

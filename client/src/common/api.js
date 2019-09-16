@@ -28,3 +28,7 @@ exports.friendTopicList = () => {
 exports.addDiscuss = (data) => {
   return instance.post('/topic/discuss/add', data)
 }
+
+exports.topicLike = (data) => {
+  return instance.post('/topic/like', data)
+}
