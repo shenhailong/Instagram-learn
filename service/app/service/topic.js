@@ -51,6 +51,11 @@ class TopicService extends Service {
       order: [[ 'created_at', 'DESC' ]],
     });
   }
+
+  async insertDiscuss(discuss) {
+    const { ctx } = this;
+    return await ctx.model.Discuss.create(discuss);
+  }
 }
 
 module.exports = TopicService;

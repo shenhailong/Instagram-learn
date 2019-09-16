@@ -49,6 +49,22 @@ class TopicController extends Controller {
     topicList && ctx.returnBody(200, 'ok', topicList);
   }
 
+  async addDiscuss() {
+    const { ctx } = this;
+    const { topicId, replyContent } = ctx.request.body;
+    // discuss userId username 存一个冗余
+    const userId = ctx.user.userId;
+    const user = await this.service.user.getUserByUserId(userId);
+    const newDiscuss = {
+      topicId,
+      replyContent,
+      replyName: user.username,
+      userId,
+    };
+    const discuss = await ctx.service.topic.insertDiscuss(newDiscuss);
+    discuss && ctx.returnBody(200, 'ok', discuss);
+  }
+
 }
 
 module.exports = TopicController;

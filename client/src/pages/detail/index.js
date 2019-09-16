@@ -5,6 +5,21 @@ import Recommend from './components/recommend/index.js';
 import API from '@common/api.js';
 import update from 'react-addons-update';
 import DynamicList from './components/dynamic-list/index.jsx'
+import { connect } from 'react-redux';
+@connect(store => {
+  return {
+    topicList: store.topicList
+  }
+}, dispatch => {
+  return {
+    addTopicList: info => {
+      dispatch({
+        type: 'ADD_TOPIC_LIST',
+        info: info
+      })
+    }
+  }
+})
 class Detail extends Component {
   constructor(props) {
     super(props)
@@ -28,7 +43,7 @@ class Detail extends Component {
   
   async initFriendTopic() {
     let response = await API.friendTopicList();
-    console.log(response)
+    this.props.addTopicList(response.data)
   }
 
   setFollowStatus = async (index, status) => {

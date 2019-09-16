@@ -24,3 +24,7 @@ exports.friendList = (data) =>{
 exports.friendTopicList = () => {
   return instance.get('/topic/friend/list')
 }
+
+exports.addDiscuss = (data) => {
+  return instance.post('/topic/discuss/add', data)
+}

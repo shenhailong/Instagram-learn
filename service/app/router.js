@@ -24,4 +24,8 @@ module.exports = app => {
   // follow
   apiV2Router.post('/friend/follow', controller.friend.follow);
   apiV2Router.get('/friend/list', controller.friend.notFriendList);
+
+  // comment
+  apiV2Router.post('/topic/discuss/add', controller.topic.addDiscuss);
+
 };
