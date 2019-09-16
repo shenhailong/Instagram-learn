@@ -44,7 +44,7 @@
     "@babel/preset-env": "^7.6.0",
     "axios": "^0.18.0",
     "prop-types": "^15.7.2",
-    "qiniu-js": "^2.5.3",
+    "qiniu-js": "^2.5.4",
     "react": "^16.4.2",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.4.2",

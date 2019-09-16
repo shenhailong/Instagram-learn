@@ -32,3 +32,7 @@ exports.addDiscuss = (data) => {
 exports.topicLike = (data) => {
   return instance.post('/topic/like', data)
 }
+
+exports.getToken = () => {
+  return instance.get('/handle/upload/get-token')
+}
