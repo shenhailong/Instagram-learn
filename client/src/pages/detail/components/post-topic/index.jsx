@@ -3,8 +3,11 @@ import Style from './index.scss';
 import Avatar from '@components/avatar';
 import { connect } from 'react-redux';
 import Upload from '@components/upload/index.jsx'
+import Carousel from '@components/carousel'
+import { notification } from 'antd';
+import API from '@common/api.js';
 
-let ImageUpload = (uploadImgSuccess, changeUploadStatus) => {
+let ImageUpload = ({uploadImgSuccess, changeUploadStatus}) => {
   return (
     <section className="image-upload">
       <div>
@@ -33,10 +36,17 @@ class PostTopic extends Component {
     super(props)
     this.state = {
       uploadStatus: 0,
-      topicDescript: ''
+      topicDescript: '',
+      imageList: []
     }
   }
-  uploadImgSuccess = () => {}
+  uploadImgSuccess = (url) => {
+    this.setState({
+      imageList: [...this.state.imageList, url],
+      uploadStatus: 2
+    })
+    console.log(url)
+  }
 
   changeUploadStatus = (status) => {
 
@@ -49,8 +59,23 @@ class PostTopic extends Component {
   }
 
   postTopic = async () => {
-    
+    if(this.state.imageList.length === 0){
+      notification.error({
+        message: '请选择图片',
+      });
+      return
+    }
+    let response = await API.addTopic({
+      topicImg: this.state.imageList,
+      topicTitle: this.state.topicDescript
+    })
+    notification.success({
+      message: response.message
+    });
+    this.props.togglePostTopic(true)
   }
+
+  closeInputUrl = () => {}
 
   render() {
     let { userInfo } = this.props;
@@ -58,9 +83,26 @@ class PostTopic extends Component {
       width: '40px',
       height: '40px'
     }
+    let ImgUpload = () => {
+      return (
+        <section key={2} className="input-url">
+          <div className="notice">
+            <span className="close-circle" onClick={this.closeInputUrl}></span>
+            <i className="icon"></i>
+            <span>
+              <Upload successCb={this.uploadImgSuccess} className={'placeholder'} />
+              添加另一张
+            </span>
+          </div>
+        </section>
+      )
+    }
     let UploadPlaceholder = () => {
       return (
         <div>
+          {
+            this.state.uploadStatus === 2 ? <ImgUpload /> : ''
+          }
           {
             this.state.uploadStatus === 0 ? 
             <ImageUpload uploadImgSuccess={this.uploadImgSuccess} changeUploadStatus={this.changeUploadStatus}/> : ''
@@ -74,6 +116,15 @@ class PostTopic extends Component {
           <header>
             <Avatar userInfo={userInfo} avatarStyle={avatarStyle} />
           </header>
+          {
+            this.state.imageList.length > 0 ? 
+            (
+              <section className="image-list">
+                <Carousel imageList={this.state.imageList} delectPhoto={this.delectPhoto} showCloseBtn={true} showSlickDot={false}>
+                </Carousel>
+              </section>
+            ) : ''
+          }
           <div className="upload-style">
             <UploadPlaceholder successCb={this.uploadImgSuccess}/>
           </div>

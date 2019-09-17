@@ -75,7 +75,7 @@ class Detail extends Component {
         <Nav />
         {
           this.state.showPostTopic ?
-          <PostTopic showPostTopic={this.showPostTopic}/> :
+          <PostTopic showPostTopic={this.showPostTopic} togglePostTopic={this.togglePostTopic}/> :
           ""
         }
         <div className="page-container">

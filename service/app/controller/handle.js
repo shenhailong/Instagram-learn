@@ -8,7 +8,7 @@ class HandleController extends Controller {
     const token = await ctx.service.qiniu.getQiniuToken();
     ctx.returnBody(200, '获取token成功 ', {
       token,
-      baseUrl: 'pxwu284rw.bkt.clouddn.com',
+      baseUrl: 'http://pxwu284rw.bkt.clouddn.com',
     });
   }
 }
